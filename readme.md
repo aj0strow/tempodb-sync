@@ -24,10 +24,10 @@ var namespaces = {
 
 Definitely need a mapping because Google messes with your column names, and TempoDB allows both tags and attributes. Suppose a table like so:
 
-id | mac address
-----------------
-01 | 
-02 | 00:12:a2:00:40:a8:2f:8b!
+| id  | mac address              |
+| --- | ------------------------ |
+| 01  |                          |
+| 02  | 00:12:a2:00:40:a8:2f:8b! |
 
 Google removes spaces and underscores, so the "mac address" column header will be "macaddress". No matter, make sure it gets mapped back to mac_address. 
 
@@ -42,7 +42,7 @@ var options = {
 };
 ```
 
-The key should be unique within the namespace. The namespace is automatically prepended to the key with a dash, and added as a tag. I use namespaces to separate different labs. 
+The key should be unique within the namespace. The namespace is automatically prepended to the key with a dash, and added as a tag. 
 
 ```javascript
 var sync = require('tempodb-sync');
@@ -51,6 +51,8 @@ sync(namespaces, options, function (err) {
 	console.log('all synced!');
 });
 ```
+
+TempoDB also doesn't allow blank fields, so I set them to `-` which is good for displaying the values in a table on the client. 
 
 ### Notes
 
