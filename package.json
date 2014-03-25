@@ -1,0 +1,10 @@
+{
+  "name": "tempodb-sync",
+  "version": "0.0.0",
+  "dependencies": {
+    "debug": "~0.7.4",
+    "google-spreadsheet": "~0.2.8",
+    "async": "~0.2.10",
+    "tempodb": "git://github.com/aj0strow/tempodb-node-js#cleanup"
+  }
+}
