@@ -18,14 +18,20 @@ The premise is that each spreadsheet embodies a namespace.
 
 ```javascript
 var namespaces = {
-  "namespace": "google-spreadsheet-key"
+  "namespace": "spreadsheet-key"
 }
 ```
 
-Definitely need a mapping because Google messes with your column names, and TempoDB allows both tags and attributes. Suppose a table like so:
+The spreadsheet key is right from the url on Google Drive.
+
+```
+docs.google.com/spreadsheet/ccc?key= <spreadsheet-key> &usp=drive_web#gid=0
+```
+
+The next step is to define a mapping because Google messes with your column names, and TempoDB allows both tags and attributes. Suppose a table like so:
 
 | id  | mac address              |
-| --- | ------------------------ |
+| --- | :----------------------- |
 | 01  |                          |
 | 02  | 00:12:a2:00:40:a8:2f:8b! |
 
@@ -45,10 +51,19 @@ var options = {
 The key should be unique within the namespace. The namespace is automatically prepended to the key with a dash, and added as a tag. 
 
 ```javascript
+{
+  key: 'namespace-01',
+  tags: [ 'namespace' ]
+}
+```
+
+Once you've defined your namespaces / spreadsheets and options, it's time to sync. 
+
+```javascript
 var sync = require('tempodb-sync');
 sync(namespaces, options, function (err) {
   if (err) throw err;
-	console.log('all synced!');
+  console.log('all synced!');
 });
 ```
 
